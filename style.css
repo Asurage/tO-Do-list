@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  display: flex;
+  background: #0f172a;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+.sidebar {
+  width: 200px;
+  height: 100vh;
+  background: #0f172a;
+  color: white;
+  padding: 30px;
+}
+.sidebar h1 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.sidebar ul {
+  padding: 0;
+}
+
+.menu-title {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  font-weight: 600px;
+}
+
+.sidebar li {
+  font-size: 16px;
+  font-weight: 550px;
+  list-style: none;
+  margin: 15px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.sidebar li:hover {
+  background: #334155;
+  cursor: pointer;
+}
+
+/* main content*/
+.main-content {
+  padding: 50px;
+  flex: 1;
+}
+.main-content h2 {
+  font-size: 30px;
+}
+
+/*Button*/
+button {
+  background: #3b82f6;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+button:hover {
+  opacity: 0.8;
+}
+
+deleteBtn {
+  background: #ef4444;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/*Task Card*/
+.task-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #0e1f45;
+  border-radius: 15px;
+  padding: 8px 20px;
+  margin-top: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
