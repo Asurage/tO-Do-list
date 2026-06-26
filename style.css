@@ -1,7 +1,7 @@
 body {
   margin: 0;
   display: flex;
-  background: #0f172a;
+  background: #141f3a;
   color: white;
   font-family: Arial, sans-serif;
 }
@@ -63,13 +63,20 @@ button:hover {
   opacity: 0.8;
 }
 
-deleteBtn {
+.deleteBtn {
   background: #ef4444;
   border: none;
-  padding: 12px 20px;
+  padding: 7px 12px;
   border-radius: 8px;
-  font-size: 15px;
+  font-size: 14px;
   cursor: pointer;
+}
+.deleteBtn:hover {
+  background-color: #dc2626;
+  transform: scale(1.05);
+}
+.deleteBtn:active {
+  transform: scale(0.95);
 }
 
 /*Task Card*/
@@ -78,14 +85,21 @@ deleteBtn {
   justify-content: space-between;
   align-items: center;
 
-  background-color: #0e1f45;
+  background-color: #0c2353;
   border-radius: 15px;
   padding: 8px 20px;
   margin-top: 20px;
 }
 
-.header {
+.left {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 13px;
+  text-decoration: none;
+}
+
+.checked {
+  text-decoration: line-through;
+  opacity: 0.5;
+  color: #9ca3af;
 }

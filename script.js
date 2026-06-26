@@ -10,11 +10,34 @@ addBtn.addEventListener("click", function () {
     taskInput.focus();
     return;
   }
+  //create task card or create a div element to hold the task
   const taskCard = document.createElement("div");
   taskCard.className = "task-card";
-  taskCard.textContent = taskInput.value;
+
+  //left side of the task card
+  const left = document.createElement("div");
+  left.className = "left";
+  taskCard.appendChild(left);
+
+  //checkbox
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  left.appendChild(checkbox);
+  checkbox.addEventListener("change", function () {
+    if (checkbox.checked) {
+      taskText.classList.add("checked");
+    } else {
+      taskText.classList.remove("checked");
+    }
+  });
+
+  //task text
+  const taskText = document.createElement("span");
+  taskText.textContent = taskInput.value;
+  left.appendChild(taskText);
   taskContainer.appendChild(taskCard);
   taskInput.value = "";
+  taskCard.appendChild(left);
 
   //delete button
   const deleteBtn = document.createElement("button");
