@@ -51,3 +51,9 @@ addBtn.addEventListener("click", function () {
     taskInput.focus();
   });
 });
+
+taskInput.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    addBtn.click();
+  }
+});
