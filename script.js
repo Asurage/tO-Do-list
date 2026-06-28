@@ -1,4 +1,7 @@
 " use strict";
+localStorage.setItem("userName", "Aswinkumar");
+console.log(localStorage.getItem("userName"));
+
 const addBtn = document.getElementById("addBtn");
 const taskInput = document.getElementById("taskInput");
 const taskContainer = document.getElementById("taskContainer");
@@ -50,6 +53,10 @@ addBtn.addEventListener("click", function () {
     taskCard.remove();
     taskInput.focus();
   });
+
+  //improve user experience by clearing the input field and focusing on it after adding a task
+  taskInput.value = "";
+  taskInput.focus();
 });
 
 taskInput.addEventListener("keydown", function (event) {
