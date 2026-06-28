@@ -62,5 +62,7 @@ addBtn.addEventListener("click", function () {
 taskInput.addEventListener("keydown", function (event) {
   if (event.key === "Enter") {
     addBtn.click();
+  } else if (event.key === "Escape") {
+    taskInput.value = "";
   }
 });
