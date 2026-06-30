@@ -92,8 +92,8 @@ button:hover {
 }
 
 .task-card:hover {
-  transform: translateX(-4px);
-  /* transform: translateY(-2px); */
+  /* transform: translateX(-4px); */
+  transform: translateY(-2px);
   transition: 0.3s;
 }
 
@@ -108,4 +108,8 @@ button:hover {
   text-decoration: line-through;
   opacity: 0.5;
   color: #9ca3af;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
 }

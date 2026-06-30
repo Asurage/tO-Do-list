@@ -1,12 +1,18 @@
 " use strict";
+localStorage.setItem("userName", "Aswinkumar");
+console.log(localStorage.getItem("userName"));
 
 const addBtn = document.getElementById("addBtn");
 const taskInput = document.getElementById("taskInput");
 const taskContainer = document.getElementById("taskContainer");
 
-let tasks = []; // Array to store tasks
-
-function createTask(task) {
+addBtn.addEventListener("click", function () {
+  if (taskInput.value.trim() === "") {
+    alert("please enter a task");
+    taskInput.value = "";
+    taskInput.focus();
+    return;
+  }
   //create task card or create a div element to hold the task
   const taskCard = document.createElement("div");
   taskCard.className = "task-card";
@@ -21,30 +27,20 @@ function createTask(task) {
   checkbox.type = "checkbox";
   left.appendChild(checkbox);
   checkbox.addEventListener("change", function () {
-    task.done = checkbox.checked; // Update the task's done status
-    if (task.done) {
+    if (checkbox.checked) {
       taskText.classList.add("checked");
     } else {
       taskText.classList.remove("checked");
     }
-
-    saveTasks(); // Save the updated tasks to localStorage
   });
 
   //task text
   const taskText = document.createElement("span");
-  taskText.textContent = task.text;
+  taskText.textContent = taskInput.value;
   left.appendChild(taskText);
-
-  checkbox.checked = task.done; // Set the checkbox state based on the task's done status
-  if (task.done) {
-    taskText.classList.add("checked");
-  } else {
-    taskText.classList.remove("checked");
-  }
-
   taskContainer.appendChild(taskCard);
-  //taskInput.value = "";
+  taskInput.value = "";
+  taskCard.appendChild(left);
 
   //delete button
   const deleteBtn = document.createElement("button");
@@ -55,47 +51,8 @@ function createTask(task) {
   //delete button functionality
   deleteBtn.addEventListener("click", function () {
     taskCard.remove();
-    saveTasks();
     taskInput.focus();
   });
-}
-
-//function to save tasks to localStorage
-function saveTasks() {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-}
-
-//load tasks function
-function loadTasks() {
-  const storedTasks = localStorage.getItem("tasks");
-  if (storedTasks) {
-    tasks = JSON.parse(storedTasks);
-    tasks.forEach((task) => {
-      createTask(task);
-    });
-  }
-}
-
-addBtn.addEventListener("click", function () {
-  if (taskInput.value.trim() === "") {
-    alert("please enter a task");
-    taskInput.value = "";
-    taskInput.focus();
-    return;
-  }
-
-  //taskInput to object
-  const task = {
-    text: taskInput.value,
-    done: false,
-  };
-
-  tasks.push(task); // Add the task to the array
-  console.log(tasks); // Log the tasks array to the console
-
-  saveTasks();
-
-  createTask(task);
 
   //improve user experience by clearing the input field and focusing on it after adding a task
   taskInput.value = "";
@@ -106,9 +63,22 @@ taskInput.addEventListener("keydown", function (event) {
   if (event.key === "Enter") {
     addBtn.click();
   } else if (event.key === "Escape") {
-    // Clear the input field when Escape key is pressed
     taskInput.value = "";
   }
 });
 
-loadTasks(); // Load tasks from localStorage when the page loads
+//practice local storage
+const tasks = [
+  {
+    task: "gym",
+    done: false,
+  },
+  {
+    task: "study",
+    done: true,
+  },
+];
+localStorage.setItem("tasks", JSON.stringify(tasks));
+const data = localStorage.getItem("tasks");
+console.log(JSON.parse(data));
+console.log(typeof JSON.parse(data));
