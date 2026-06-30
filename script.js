@@ -54,8 +54,12 @@ function createTask(task) {
 
   //delete button functionality
   deleteBtn.addEventListener("click", function () {
+    //delete the task from the tasks array
+    const index = tasks.indexOf(task);
+    tasks.splice(index, 1); // Remove the task from the array
+    saveTasks(); // Save the updated tasks to localStorage
+
     taskCard.remove();
-    saveTasks();
     taskInput.focus();
   });
 }
