@@ -34,6 +34,7 @@ body {
   margin: 15px;
   padding: 10px;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .sidebar li:hover {
@@ -112,4 +113,10 @@ button:hover {
 
 input[type="checkbox"] {
   cursor: pointer;
+}
+
+.star {
+  display: inline-block;
+  width: 20px;
+  text-align: center;
 }

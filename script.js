@@ -1,10 +1,20 @@
 " use strict";
-
+//buttons
 const addBtn = document.getElementById("addBtn");
+const dashboard = document.getElementById("dashboard");
+const today = document.getElementById("today");
+const upcoming = document.getElementById("upcoming");
+const important = document.getElementById("important");
+
+//input and container
 const taskInput = document.getElementById("taskInput");
 const taskContainer = document.getElementById("taskContainer");
+const taskList = document.getElementById("taskList");
+const impTask = document.getElementById("importantTask");
 
 let tasks = []; // Array to store tasks
+
+let currentFilter = "dashboard";
 
 function createTask(task) {
   //create task card or create a div element to hold the task
@@ -22,19 +32,23 @@ function createTask(task) {
   left.appendChild(checkbox);
   checkbox.addEventListener("change", function () {
     task.done = checkbox.checked; // Update the task's done status
-    if (task.done) {
-      taskText.classList.add("checked");
-    } else {
-      taskText.classList.remove("checked");
-    }
 
     saveTasks(); // Save the updated tasks to localStorage
+    renderTasks(); // Re-render the tasks to reflect the change
   });
 
   //task text
   const taskText = document.createElement("span");
   taskText.textContent = task.text;
   left.appendChild(taskText);
+
+  const star = document.createElement("span");
+  star.className = "star";
+
+  if (task.important) {
+    star.textContent = "⭐";
+  }
+  left.prepend(star);
 
   checkbox.checked = task.done; // Set the checkbox state based on the task's done status
   if (task.done) {
@@ -59,8 +73,30 @@ function createTask(task) {
     tasks.splice(index, 1); // Remove the task from the array
     saveTasks(); // Save the updated tasks to localStorage
 
-    taskCard.remove();
+    renderTasks(); // Re-render the tasks to reflect the change
     taskInput.focus();
+  });
+}
+
+function renderTasks() {
+  taskContainer.innerHTML = ""; // Clear the task container
+
+  tasks.forEach((task) => {
+    let shouldDisplay = false;
+
+    if (currentFilter === "today" && task.list === "today") {
+      shouldDisplay = true;
+    } else if (currentFilter === "upcoming" && task.list === "upcoming") {
+      shouldDisplay = true;
+    } else if (currentFilter === "important" && task.important) {
+      shouldDisplay = true;
+    } else if (currentFilter === "dashboard") {
+      shouldDisplay = true;
+    }
+    if (shouldDisplay) {
+      createTask(task);
+    }
+    //console.log(task.list, currentFilter);
   });
 }
 
@@ -74,9 +110,7 @@ function loadTasks() {
   const storedTasks = localStorage.getItem("tasks");
   if (storedTasks) {
     tasks = JSON.parse(storedTasks);
-    tasks.forEach((task) => {
-      createTask(task);
-    });
+    renderTasks(); // Render the tasks after loading them from localStorage
   }
 }
 
@@ -92,6 +126,8 @@ addBtn.addEventListener("click", function () {
   const task = {
     text: taskInput.value,
     done: false,
+    list: taskList.value,
+    important: impTask.checked,
   };
 
   tasks.push(task); // Add the task to the array
@@ -99,11 +135,32 @@ addBtn.addEventListener("click", function () {
 
   saveTasks();
 
-  createTask(task);
+  renderTasks(); // Render the tasks after adding a new task
 
   //improve user experience by clearing the input field and focusing on it after adding a task
   taskInput.value = "";
+  impTask.checked = false; // Reset the important checkbox
   taskInput.focus();
+});
+
+dashboard.addEventListener("click", function () {
+  currentFilter = "dashboard";
+  renderTasks();
+});
+
+today.addEventListener("click", function () {
+  currentFilter = "today";
+  renderTasks();
+});
+
+upcoming.addEventListener("click", function () {
+  currentFilter = "upcoming";
+  renderTasks();
+});
+
+important.addEventListener("click", function () {
+  currentFilter = "important";
+  renderTasks();
 });
 
 taskInput.addEventListener("keydown", function (event) {

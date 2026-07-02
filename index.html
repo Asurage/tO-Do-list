@@ -11,10 +11,10 @@
 
       <p class="menu-title">MENU</p>
       <ul>
-        <li>Dashboard</li>
-        <li>Today</li>
-        <li>Upcoming</li>
-        <li>Important</li>
+        <li id="dashboard">Dashboard</li>
+        <li id="today">Today</li>
+        <li id="upcoming">Upcoming</li>
+        <li id="important">Important</li>
       </ul>
     </div>
 
@@ -23,6 +23,15 @@
         <h2>Todays Task's</h2>
       </div>
       <input type="text" id="taskInput" placeholder="Enter task" />
+
+      <label for="taskList">List</label>
+      <select id="taskList">
+        <option value="today">today</option>
+        <option value="upcoming">upcoming</option>
+      </select>
+
+      <input type="checkbox" id="importantTask" />
+      <label for="importantTask">Important</label>
 
       <button id="addBtn">Add Task</button>
       <p id="empty"></p>
@@ -34,7 +43,6 @@
       <p>priority:High🔴</p>
     </div>
     
-
     <div class="task-card">
       <h3>refill water can</h3>
       <p>priority:low🟢</p>
